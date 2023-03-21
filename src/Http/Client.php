@@ -2,16 +2,15 @@
 
 namespace Payhub\Http;
 
+use GuzzleHttp\RequestOptions;
 use Payhub\Contracts\HttpClient;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 
-class Client implements HttpClient
+class Client extends BaseClient implements HttpClient
 {
     protected PendingRequest|Factory $http;
-
-    private array $config;
 
     public function __construct(Factory $factory, array $config = [])
     {
@@ -32,29 +31,13 @@ class Client implements HttpClient
     }
 
     /**
-     * @param $config
-     * @return void
-     */
-    public function processOptions($config): void
-    {
-        if (!isset($config['url'])) {
-            throw new \InvalidArgumentException('Url is required');
-        }
-
-        if (!isset($config['token'])) {
-            throw new \InvalidArgumentException('Token is required');
-        }
-        $this->config = $config;
-    }
-
-    /**
      * @param string $uri
      * @param array $options
      * @return array
      */
     public function get(string $uri, array $options = []): array
     {
-        return $this->getHttp()->get($uri, $options)->throw()->json();
+        return $this->getHttp()->get($this->getUrl($uri), $options)->throw()->json();
     }
 
     /**
@@ -64,6 +47,6 @@ class Client implements HttpClient
      */
     public function post(string $uri, array $options = []): array
     {
-        return $this->getHttp()->post($uri, $options)->throw()->json();
+        return $this->getHttp()->post($this->getUrl($uri), $options)->throw()->json();
     }
 }

@@ -15,7 +15,7 @@ class OrderProduct extends Base
 
     public function toArray(): array
     {
-        return array_filter([
+        return [
             'productId' => $this->getProductId(),
             'preview' => $this->getPreview(),
             'name' => $this->getName(),
@@ -24,7 +24,7 @@ class OrderProduct extends Base
             'count' => $this->getCount(),
             'sale' => $this->getSale(),
             'is_virtual' => $this->isVirtual(),
-        ]);
+        ];
     }
 
     public function setProductId(int $productId): static

@@ -14,6 +14,11 @@ abstract class Base
         }
     }
 
+    public function toArray(): array
+    {
+        return [];
+    }
+
     public function __toArray(): array
     {
         return $this->toArray();

@@ -7,7 +7,7 @@ use Payhub\Support\Normalizer;
 class Order extends Base
 {
     protected bool $type = true;
-    protected array $paymentMethods;
+    protected array $paymentMethods = [];
     protected mixed $orderId;
     protected mixed $total;
     protected mixed $sale;
@@ -39,16 +39,17 @@ class Order extends Base
 
     public function toArray(): array
     {
-        return array_filter([
-            'type' => $this->type,
-            'paymentMethods' => $this->type,
-            'orderId' => $this->type,
-            'total' => $this->type,
-            'sale' => $this->sale,
-            'client' => $this->normalize($this->client)->toArray(),
-            'delivery' => $this->normalize($this->delivery)->toArray(),
-            'products' => $this->products->toArray(),
-        ]);
+        return [
+            'type' => $this->getType(),
+            'paymentMethods' => $this->getPaymentMethods(),
+            'order_id' => $this->getOrderId(),
+            'total' => $this->getTotal(),
+            'sale' => $this->getSale(),
+            'date' => $this->getDate(),
+            'client' => $this->normalize($this->getOrderClient())->toArray(),
+            'delivery' => $this->normalize($this->getOrderDelivery())->toArray(),
+            'products' => $this->getOrderProducts()->toArray(),
+        ];
     }
 
     public static function make($params = []): static
@@ -73,6 +74,11 @@ class Order extends Base
         $this->type = $type;
 
         return $this;
+    }
+
+    public function getType(): bool
+    {
+        return $this->type;
     }
 
     public function getPaymentMethods(): array
@@ -156,7 +162,7 @@ class Order extends Base
         return $this->date;
     }
 
-    public function setDate(\DateInterval $date): static
+    public function setDate(\DateTimeInterface $date): static
     {
         $this->date = $date->format('Y-m-d');
 
@@ -166,7 +172,7 @@ class Order extends Base
     /**
      * @return OrderClient
      */
-    public function getClient(): OrderClient
+    public function getOrderClient(): OrderClient
     {
         return $this->client;
     }
@@ -174,7 +180,7 @@ class Order extends Base
     /**
      * @param OrderClient $client
      */
-    public function setClient(OrderClient $client): void
+    public function setOrderClient(OrderClient $client): void
     {
         $this->client = $client;
     }
@@ -182,7 +188,7 @@ class Order extends Base
     /**
      * @return OrderDelivery
      */
-    public function getDelivery(): OrderDelivery
+    public function getOrderDelivery(): OrderDelivery
     {
         return $this->delivery;
     }
@@ -190,7 +196,7 @@ class Order extends Base
     /**
      * @param OrderDelivery $delivery
      */
-    public function setDelivery(OrderDelivery $delivery): void
+    public function setOrderDelivery(OrderDelivery $delivery): void
     {
         $this->delivery = $delivery;
     }
@@ -198,7 +204,7 @@ class Order extends Base
     /**
      * @return OrderProductCollection
      */
-    public function getProducts(): OrderProductCollection
+    public function getOrderProducts(): OrderProductCollection
     {
         return $this->products;
     }
@@ -206,7 +212,7 @@ class Order extends Base
     /**
      * @param OrderProductCollection $products
      */
-    public function setProducts(OrderProductCollection $products): void
+    public function setOrderProducts(OrderProductCollection $products): void
     {
         $this->products = $products;
     }

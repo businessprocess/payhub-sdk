@@ -15,7 +15,7 @@ class OrderClient extends Base
 
     public function toArray(): array
     {
-        return array_filter([
+        return [
             'firstName' => $this->getFirstName(),
             'secondName' => $this->getSecondName(),
             'email' => $this->getEmail(),
@@ -24,7 +24,7 @@ class OrderClient extends Base
             'city' => $this->getCity(),
             'address' => $this->getAddress(),
             'postCode' => $this->getPostCode(),
-        ]);
+        ];
     }
 
     public function getFirstName(): string

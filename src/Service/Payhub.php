@@ -12,38 +12,14 @@ class Payhub
 {
     protected HttpClient $client;
 
-    protected ?string $key = null;
-
     public function __construct(array $config = [], ?HttpClient $client = null)
     {
         $this->client = $client ?? new GuzzleClient($config);
-
-        $this->setKey($config['key'] ?? null);
-    }
-
-    private function getKey(): string
-    {
-        if (is_null($this->key)) {
-            throw new \InvalidArgumentException('Resource key is required');
-        }
-        return $this->key;
-    }
-
-    public function setKey(mixed $key): static
-    {
-        $this->key = $key;
-
-        return $this;
-    }
-
-    private function getUrl($url): string
-    {
-        return str_replace('{key}', $this->getKey(), $url);
     }
 
     public function create(Order $order): OrderCreateResponse
     {
-        $response = $this->client->post($this->getUrl('order/{key}/create'), $order->toArray());
+        $response = $this->client->post('order/{key}/create', $order->toArray());
 
         return new OrderCreateResponse($response);
     }
@@ -53,14 +29,14 @@ class Payhub
      */
     public function getList(): array
     {
-        $response = $this->client->get($this->getUrl('order/{key}'));
+        $response = $this->client->get('order/{key}');
 
         return array_map(fn($item) => new Order($item), $response);
     }
 
     public function getById($id): Order
     {
-        $response = $this->client->get($this->getUrl("order/{key}/$id"));
+        $response = $this->client->get("order/{key}/$id");
 
         return new Order($response);
     }

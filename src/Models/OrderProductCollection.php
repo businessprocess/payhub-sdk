@@ -35,7 +35,7 @@ class OrderProductCollection
             $items = array_map($callback, $this->items);
         }
 
-        return new static(array_combine($keys, $items));
+        return collect(array_combine($keys, $items));
     }
 
     public function toArray(): array

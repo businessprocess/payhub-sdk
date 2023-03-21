@@ -13,14 +13,14 @@ class OrderDelivery extends Base
 
     public function toArray(): array
     {
-        return array_filter([
+        return [
             'type' => $this->getType(),
             'country' => $this->getCountry(),
             'city' => $this->getCity(),
             'address' => $this->getAddress(),
             'postCode' => $this->getPostCode(),
             'price' => $this->getPrice(),
-        ]);
+        ];
     }
 
     public function getType(): string
