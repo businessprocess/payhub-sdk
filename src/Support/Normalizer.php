@@ -44,6 +44,10 @@ class Normalizer
 
     private function getGeoId($id): string
     {
+        if (!$id) {
+            throw new \LogicException('Country is required');
+        }
+
         if ($this->geoService()->isServiceId($id)) {
             return $id;
         }

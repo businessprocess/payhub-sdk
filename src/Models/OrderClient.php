@@ -9,9 +9,9 @@ class OrderClient extends Base
     protected string $email;
     protected string $phone;
     protected string $country;
-    protected string $city;
-    protected string $address;
-    protected ?string $postCode;
+    protected ?string $city = null;
+    protected ?string $address = null;
+    protected ?string $postCode = null;
 
     public function toArray(): array
     {
@@ -87,7 +87,7 @@ class OrderClient extends Base
         return $this;
     }
 
-    public function getCity(): string
+    public function getCity(): ?string
     {
         return $this->city;
     }
@@ -99,7 +99,7 @@ class OrderClient extends Base
         return $this;
     }
 
-    public function getAddress(): string
+    public function getAddress(): ?string
     {
         return $this->address;
     }

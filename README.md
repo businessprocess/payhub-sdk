@@ -40,7 +40,11 @@ composer update
 ## Usage
 
 ```php
-$client = new \Payhub\Service\Payhub();
+$client = new \Payhub\Service\Payhub([
+    'url' => '', # Project url
+    'key' => '', # Resource key
+    'token' => '', # Api token
+]);
 $order = \Payhub\Models\Order::make([
     'type' => 1,
     'callback_url' => 'https://your-callback.url',

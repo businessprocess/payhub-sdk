@@ -5,12 +5,12 @@ namespace Payhub\Models;
 class OrderProduct extends Base
 {
     protected int $productId;
-    protected ?string $preview;
+    protected ?string $preview = null;
     protected string $name;
-    protected ?string $nameFake;
+    protected ?string $nameFake = null;
     protected string $price;
     protected int $count;
-    protected mixed $sale;
+    protected mixed $sale = null;
     protected bool $isVirtual = false;
 
     public function toArray(): array
@@ -101,7 +101,7 @@ class OrderProduct extends Base
     /**
      * @return string
      */
-    public function getPreview(): string
+    public function getPreview(): ?string
     {
         return $this->preview;
     }

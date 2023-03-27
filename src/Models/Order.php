@@ -10,7 +10,7 @@ class Order extends Base
     protected array $paymentMethods = [];
     protected mixed $orderId;
     protected mixed $total;
-    protected mixed $sale;
+    protected mixed $sale = null;
     protected ?string $callbackUrl;
     protected string $language;
     protected string $date;
@@ -162,9 +162,9 @@ class Order extends Base
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): static
+    public function setDate(\DateTimeInterface|string $date): static
     {
-        $this->date = $date->format('Y-m-d');
+        $this->date = is_string($date) ? $date : $date->format('Y-m-d');
 
         return $this;
     }

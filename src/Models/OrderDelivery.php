@@ -4,12 +4,12 @@ namespace Payhub\Models;
 
 class OrderDelivery extends Base
 {
-    protected string $type;
-    protected ?string $country;
-    protected ?string $city;
-    protected ?string $address;
-    protected ?string $postCode;
-    protected mixed $price;
+    protected ?string $type = null;
+    protected ?string $country = null;
+    protected ?string $city = null;
+    protected ?string $address = null;
+    protected ?string $postCode = null;
+    protected mixed $price = null;
 
     public function toArray(): array
     {
@@ -23,7 +23,7 @@ class OrderDelivery extends Base
         ];
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
