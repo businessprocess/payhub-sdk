@@ -33,7 +33,7 @@ class Normalizer
      */
     public function build(Base $model): void
     {
-        if (property_exists($model, 'country')) {
+        if (property_exists($model, 'country') && $model->getCountry()) {
             $model->setCountry(
                 $this->getGeoId(
                     $model->getCountry()
@@ -44,10 +44,6 @@ class Normalizer
 
     private function getGeoId($id): string
     {
-        if (!$id) {
-            throw new \LogicException('Country is required');
-        }
-
         if ($this->geoService()->isServiceId($id)) {
             return $id;
         }
