@@ -11,7 +11,10 @@ class Order extends Base
     protected mixed $orderId;
     protected mixed $total;
     protected mixed $sale = null;
-    protected ?string $callbackUrl;
+    protected ?string $callbackUrl = null;
+    protected ?string $redirectSuccess = null;
+    protected ?string $redirectFail = null;
+    protected ?string $resource = null;
     protected string $language;
     protected string $date;
 
@@ -46,6 +49,10 @@ class Order extends Base
             'total' => $this->getTotal(),
             'sale' => $this->getSale(),
             'date' => $this->getDate(),
+            'callback_url' => $this->getCallbackUrl(),
+            'redirect_success' => $this->getRedirectSuccess(),
+            'redirect_fail' => $this->getRedirectFail(),
+            'resource' => $this->getResource(),
             'client' => $this->normalize($this->getOrderClient())->toArray(),
             'delivery' => $this->normalize($this->getOrderDelivery())->toArray(),
             'products' => $this->getOrderProducts()->toArray(),
@@ -136,11 +143,7 @@ class Order extends Base
 
     public function setCallbackUrl(?string $callbackUrl): static
     {
-        if ($callbackUrl && !filter_var($callbackUrl, FILTER_VALIDATE_URL)) {
-            throw new \LogicException('Callback must be a url');
-        }
-
-        $this->callbackUrl = $callbackUrl;
+        $this->callbackUrl = $this->isUrl($callbackUrl);
 
         return $this;
     }
@@ -215,5 +218,61 @@ class Order extends Base
     public function setOrderProducts(OrderProductCollection $products): void
     {
         $this->products = $products;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getRedirectSuccess(): ?string
+    {
+        return $this->redirectSuccess;
+    }
+
+    /**
+     * @param string|null $redirectSuccess
+     */
+    public function setRedirectSuccess(?string $redirectSuccess): void
+    {
+        $this->redirectSuccess = $this->isUrl($redirectSuccess);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getRedirectFail(): ?string
+    {
+        return $this->redirectFail;
+    }
+
+    /**
+     * @param string|null $redirectFail
+     */
+    public function setRedirectFail(?string $redirectFail): void
+    {
+        $this->redirectFail = $this->isUrl($redirectFail);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getResource(): ?string
+    {
+        return $this->resource;
+    }
+
+    /**
+     * @param string|null $resource
+     */
+    public function setResource(?string $resource): void
+    {
+        $this->resource = $this->isUrl($resource);
+    }
+
+    private function isUrl($url)
+    {
+        if ($url && !filter_var($url, FILTER_VALIDATE_URL)) {
+            throw new \LogicException("Parameter [$url] must be a url");
+        }
+        return $url;
     }
 }
