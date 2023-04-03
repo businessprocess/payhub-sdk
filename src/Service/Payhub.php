@@ -12,9 +12,13 @@ class Payhub
 {
     protected HttpClient $client;
 
+    protected Webhook $webhook;
+
     public function __construct(array $config = [], ?HttpClient $client = null)
     {
         $this->client = $client ?? new GuzzleClient($config);
+
+        $this->webhook = new Webhook($this->client);
     }
 
     public function create(Order $order): OrderCreateResponse
@@ -49,5 +53,10 @@ class Payhub
         $response = $this->client->get('payment-method/list');
 
         return array_map(fn($item) => new PaymentMethod($item), $response);
+    }
+
+    public function webhook(): Webhook
+    {
+        return $this->webhook;
     }
 }

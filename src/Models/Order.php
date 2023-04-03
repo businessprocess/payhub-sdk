@@ -167,7 +167,7 @@ class Order extends Base
 
     public function setDate(\DateTimeInterface|string $date): static
     {
-        $this->date = is_string($date) ? $date : $date->format('Y-m-d');
+        $this->date = is_string($date) ? $date : $date->format('Y-m-d H:i:s');
 
         return $this;
     }

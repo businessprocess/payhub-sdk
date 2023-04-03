@@ -17,4 +17,18 @@ interface HttpClient
      * @return array
      */
     public function post(string $uri, array $options = []);
+
+    /**
+     * @param string $uri
+     * @param array $options
+     * @return array
+     */
+    public function put(string $uri, array $options = []);
+
+    /**
+     * @param string $uri
+     * @param array $options
+     * @return array
+     */
+    public function delete(string $uri, array $options = []);
 }

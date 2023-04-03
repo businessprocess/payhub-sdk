@@ -49,4 +49,18 @@ class GuzzleClient extends BaseClient implements HttpClient
 
         return json_decode($response->getBody()->getContents(), true);
     }
+
+    public function put(string $uri, array $options = []): array
+    {
+        $response = $this->getHttp()->put($this->getUrl($uri), [RequestOptions::JSON => $options]);
+
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+    public function delete(string $uri, array $options = []): array
+    {
+        $response = $this->getHttp()->delete($this->getUrl($uri), [RequestOptions::JSON => $options]);
+
+        return json_decode($response->getBody()->getContents(), true);
+    }
 }

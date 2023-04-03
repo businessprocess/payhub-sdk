@@ -49,4 +49,24 @@ class Client extends BaseClient implements HttpClient
     {
         return $this->getHttp()->post($this->getUrl($uri), $options)->throw()->json();
     }
+
+    /**
+     * @param string $uri
+     * @param array $options
+     * @return array
+     */
+    public function put(string $uri, array $options = []): array
+    {
+        return $this->getHttp()->put($this->getUrl($uri), $options)->throw()->json();
+    }
+
+    /**
+     * @param string $uri
+     * @param array $options
+     * @return array
+     */
+    public function delete(string $uri, array $options = []): array
+    {
+        return $this->getHttp()->delete($this->getUrl($uri), $options)->throw()->json();
+    }
 }
