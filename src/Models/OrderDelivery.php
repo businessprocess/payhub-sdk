@@ -18,7 +18,7 @@ class OrderDelivery extends Base
             'country' => $this->getCountry(),
             'city' => $this->getCity(),
             'address' => $this->getAddress(),
-            'postCode' => $this->getPostCode(),
+            'postcode' => $this->getPostCode(),
             'price' => $this->getPrice(),
         ];
     }

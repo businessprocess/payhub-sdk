@@ -16,7 +16,7 @@ class OrderProduct extends Base
     public function toArray(): array
     {
         return [
-            'productId' => $this->getProductId(),
+            'product_id' => $this->getProductId(),
             'preview' => $this->getPreview(),
             'name' => $this->getName(),
             'name_fake' => $this->getNameFake(),

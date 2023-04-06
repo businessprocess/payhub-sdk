@@ -44,7 +44,7 @@ class Order extends Base
     {
         return [
             'type' => $this->getType(),
-            'paymentMethods' => $this->getPaymentMethods(),
+            'payment_methods' => $this->getPaymentMethods(),
             'order_id' => $this->getOrderId(),
             'total' => $this->getTotal(),
             'sale' => $this->getSale(),

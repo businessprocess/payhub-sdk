@@ -16,14 +16,14 @@ class OrderClient extends Base
     public function toArray(): array
     {
         return [
-            'firstName' => $this->getFirstName(),
-            'secondName' => $this->getSecondName(),
+            'firstname' => $this->getFirstName(),
+            'secondname' => $this->getSecondName(),
             'email' => $this->getEmail(),
             'phone' => $this->getPhone(),
             'country' => $this->getCountry(),
             'city' => $this->getCity(),
             'address' => $this->getAddress(),
-            'postCode' => $this->getPostCode(),
+            'postcode' => $this->getPostCode(),
         ];
     }
 
