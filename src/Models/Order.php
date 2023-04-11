@@ -8,7 +8,7 @@ class Order extends Base
 {
     protected bool $type = true;
     protected array $paymentMethods = [];
-    protected mixed $orderId;
+    protected mixed $orderId = null;
     protected mixed $total;
     protected mixed $sale = null;
     protected ?string $callbackUrl = null;
@@ -17,6 +17,11 @@ class Order extends Base
     protected ?string $resource = null;
     protected string $language;
     protected string $date;
+
+    protected mixed $salePercent = null;
+    protected ?int $showroomId = null;
+    protected ?string $source = null;
+    protected ?int $promotionId = null;
 
     protected OrderClient $client;
     protected OrderDelivery $delivery;
@@ -53,6 +58,12 @@ class Order extends Base
             'redirect_success' => $this->getRedirectSuccess(),
             'redirect_fail' => $this->getRedirectFail(),
             'resource' => $this->getResource(),
+
+            'sale_percent' => $this->getSalePercent(),
+            'showroom_id' => $this->getShowroomId(),
+            'source' => $this->getSource(),
+            'promotion_id' => $this->getPromotionId(),
+
             'client' => $this->normalize($this->getOrderClient())->toArray(),
             'delivery' => $this->normalize($this->getOrderDelivery())->toArray(),
             'products' => $this->getOrderProducts()->toArray(),
@@ -180,12 +191,11 @@ class Order extends Base
         return $this->client;
     }
 
-    /**
-     * @param OrderClient $client
-     */
-    public function setOrderClient(OrderClient $client): void
+    public function setOrderClient(OrderClient $client): static
     {
         $this->client = $client;
+
+        return $this;
     }
 
     /**
@@ -196,28 +206,23 @@ class Order extends Base
         return $this->delivery;
     }
 
-    /**
-     * @param OrderDelivery $delivery
-     */
-    public function setOrderDelivery(OrderDelivery $delivery): void
+    public function setOrderDelivery(OrderDelivery $delivery): static
     {
         $this->delivery = $delivery;
+
+        return $this;
     }
 
-    /**
-     * @return OrderProductCollection
-     */
     public function getOrderProducts(): OrderProductCollection
     {
         return $this->products;
     }
 
-    /**
-     * @param OrderProductCollection $products
-     */
-    public function setOrderProducts(OrderProductCollection $products): void
+    public function setOrderProducts(OrderProductCollection $products): static
     {
         $this->products = $products;
+
+        return $this;
     }
 
     /**
@@ -228,12 +233,11 @@ class Order extends Base
         return $this->redirectSuccess;
     }
 
-    /**
-     * @param string|null $redirectSuccess
-     */
-    public function setRedirectSuccess(?string $redirectSuccess): void
+    public function setRedirectSuccess(?string $redirectSuccess): static
     {
         $this->redirectSuccess = $this->isUrl($redirectSuccess);
+
+        return $this;
     }
 
     /**
@@ -244,12 +248,11 @@ class Order extends Base
         return $this->redirectFail;
     }
 
-    /**
-     * @param string|null $redirectFail
-     */
-    public function setRedirectFail(?string $redirectFail): void
+    public function setRedirectFail(?string $redirectFail): static
     {
         $this->redirectFail = $this->isUrl($redirectFail);
+
+        return $this;
     }
 
     /**
@@ -260,12 +263,11 @@ class Order extends Base
         return $this->resource;
     }
 
-    /**
-     * @param string|null $resource
-     */
-    public function setResource(?string $resource): void
+    public function setResource(?string $resource): static
     {
         $this->resource = $this->isUrl($resource);
+
+        return $this;
     }
 
     private function isUrl($url)
@@ -274,5 +276,63 @@ class Order extends Base
             throw new \LogicException("Parameter [$url] must be a url");
         }
         return $url;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSalePercent(): mixed
+    {
+        return $this->salePercent;
+    }
+
+    public function setSalePercent(mixed $salePercent): static
+    {
+        $this->salePercent = $salePercent;
+
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getShowroomId(): ?int
+    {
+        return $this->showroomId;
+    }
+
+    public function setShowroomId(int $showroomId): static
+    {
+        $this->showroomId = $showroomId;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSource(): ?string
+    {
+        return $this->source;
+    }
+
+    public function setSource(string $source): static
+    {
+        $this->source = $source;
+
+        return $this;
+    }
+
+
+    public function getPromotionId(): ?int
+    {
+        return $this->promotionId;
+    }
+
+    public function setPromotionId(int $promotionId): static
+    {
+        $this->promotionId = $promotionId;
+
+        return $this;
     }
 }

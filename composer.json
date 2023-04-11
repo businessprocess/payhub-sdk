@@ -15,7 +15,7 @@
   "require": {
     "php": "^8.0",
     "guzzlehttp/guzzle": "^7.0",
-    "businessprocess/geo-service-sdk": "^1.0.3"
+    "businessprocess/geo-service-sdk": "^1.0.4"
   },
   "autoload": {
     "psr-4": {

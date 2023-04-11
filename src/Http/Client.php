@@ -10,7 +10,7 @@ use Illuminate\Http\Client\Response;
 
 class Client extends BaseClient implements HttpClient
 {
-    protected PendingRequest|Factory $http;
+    protected PendingRequest $http;
 
     public function __construct(Factory $factory, array $config = [])
     {

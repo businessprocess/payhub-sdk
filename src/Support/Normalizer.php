@@ -33,26 +33,30 @@ class Normalizer
      */
     public function build(Base $model): void
     {
-        if (property_exists($model, 'country') && $model->getCountry()) {
+        if (property_exists($model, 'country') && $model?->getCountry()) {
             $model->setCountry(
-                $this->getGeoId(
-                    $model->getCountry()
-                )
+                $this->getGeoId($model->getCountry(), 'country')
+            );
+        }
+
+        if (property_exists($model, 'city') && $model?->getCity()) {
+            $model->setCity(
+                $this->getGeoId($model->getCity(), 'city')
             );
         }
     }
 
-    private function getGeoId($id): string
+    private function getGeoId($id, string $type): string
     {
-        if ($this->geoService()->isServiceId($id)) {
+        if ($this->geoService()->isServiceId($id) || strlen($id) === 2) {
             return $id;
         }
 
         if (!isset($this->searched[$id])) {
-            $result = $this->geoService()->search($id, null, 'country');
+            $result = $this->geoService()->search($id, null, $type);
 
             if ($result->count() !== 1) {
-                throw new \LogicException('Country not found');
+                throw new \LogicException(ucfirst($type) . ' not found');
             }
             $this->searched[$id] = $result->first()->getId();
         }

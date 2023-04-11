@@ -10,6 +10,7 @@ class OrderDelivery extends Base
     protected ?string $address = null;
     protected ?string $postCode = null;
     protected mixed $price = null;
+    protected ?int $days = null;
 
     public function toArray(): array
     {
@@ -20,6 +21,7 @@ class OrderDelivery extends Base
             'address' => $this->getAddress(),
             'postcode' => $this->getPostCode(),
             'price' => $this->getPrice(),
+            'days' => $this->getDays(),
         ];
     }
 
@@ -93,5 +95,23 @@ class OrderDelivery extends Base
         $this->price = $price;
 
         return $this;
+    }
+
+    /**
+     * @param int $days
+     * @return OrderDelivery
+     */
+    public function setDays(int $days): static
+    {
+        $this->days = $days;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getDays(): ?int
+    {
+        return $this->days;
     }
 }
