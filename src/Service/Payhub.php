@@ -45,6 +45,11 @@ class Payhub
         return new Order($response);
     }
 
+    public function check($checkoutId): array
+    {
+        return $this->client->get("order/{key}/check/$checkoutId");
+    }
+
     /**
      * @return array<PaymentMethod>
      */

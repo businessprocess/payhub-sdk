@@ -27,6 +27,6 @@ class PayhubServiceProvider extends ServiceProvider
             ->needs('$config')
             ->giveConfig('payhub');
 
-        Normalizer::setGeoService(app()->make(GeoService::class));
+        Normalizer::setGeoService($this->app->make(GeoService::class));
     }
 }

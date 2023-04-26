@@ -104,9 +104,9 @@ class Order extends Base
         return $this->paymentMethods;
     }
 
-    public function setPaymentMethods(array $paymentMethods): static
+    public function setPaymentMethods($methods): static
     {
-        $this->paymentMethods = $paymentMethods;
+        $this->paymentMethods = is_array($methods) ? $methods : func_get_args();
 
         return $this;
     }
