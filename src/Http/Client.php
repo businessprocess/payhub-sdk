@@ -2,7 +2,6 @@
 
 namespace Payhub\Http;
 
-use GuzzleHttp\RequestOptions;
 use Payhub\Contracts\HttpClient;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\PendingRequest;
@@ -17,6 +16,7 @@ class Client extends BaseClient implements HttpClient
         $this->processOptions($config);
 
         $this->http = $factory->asJson()
+            ->acceptJson()
             ->baseUrl($this->config['url'])
             ->withToken($this->config['token'])
             ->timeout(30);
@@ -33,9 +33,9 @@ class Client extends BaseClient implements HttpClient
     /**
      * @param string $uri
      * @param array $options
-     * @return array
+     * @return array|null
      */
-    public function get(string $uri, array $options = []): array
+    public function get(string $uri, array $options = []): ?array
     {
         return $this->getHttp()->get($this->getUrl($uri), $options)->throw()->json();
     }
@@ -43,9 +43,9 @@ class Client extends BaseClient implements HttpClient
     /**
      * @param string $uri
      * @param array $options
-     * @return array
+     * @return array|null
      */
-    public function post(string $uri, array $options = []): array
+    public function post(string $uri, array $options = []): ?array
     {
         return $this->getHttp()->post($this->getUrl($uri), $options)->throw()->json();
     }
@@ -53,9 +53,9 @@ class Client extends BaseClient implements HttpClient
     /**
      * @param string $uri
      * @param array $options
-     * @return array
+     * @return array|null
      */
-    public function put(string $uri, array $options = []): array
+    public function put(string $uri, array $options = []): ?array
     {
         return $this->getHttp()->put($this->getUrl($uri), $options)->throw()->json();
     }
@@ -63,9 +63,9 @@ class Client extends BaseClient implements HttpClient
     /**
      * @param string $uri
      * @param array $options
-     * @return array
+     * @return array|null
      */
-    public function delete(string $uri, array $options = []): array
+    public function delete(string $uri, array $options = []): ?array
     {
         return $this->getHttp()->delete($this->getUrl($uri), $options)->throw()->json();
     }
