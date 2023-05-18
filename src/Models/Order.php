@@ -8,6 +8,7 @@ class Order extends Base
 {
     protected bool $type = true;
     protected array $paymentMethods = [];
+    protected array $payments = [];
     protected mixed $orderId = null;
     protected mixed $total;
     protected mixed $sale = null;
@@ -50,6 +51,7 @@ class Order extends Base
         return [
             'type' => $this->getType(),
             'payment_methods' => $this->getPaymentMethods(),
+            'payments' => $this->getPayments(),
             'order_id' => $this->getOrderId(),
             'total' => $this->getTotal(),
             'sale' => $this->getSale(),
@@ -125,6 +127,19 @@ class Order extends Base
 
     public function getTotal(): mixed
     {
+        if (!empty($this->payments)) {
+            $total = array_reduce(
+                $this->payments,
+                fn($carry, $payment) => $carry + (float)$payment['amount'],
+                0
+            );
+
+            if ($total >= $this->total) {
+                throw new \LogicException(
+                    'The amount of payments cannot be greater than or equal to the amount of the order'
+                );
+            }
+        }
         return $this->total;
     }
 
@@ -334,5 +349,18 @@ class Order extends Base
         $this->promotionId = $promotionId;
 
         return $this;
+    }
+
+    public function setPayments(array $payments): Order
+    {
+        foreach ($payments as $payment) {
+            $this->payments[] = is_array($payment) ? new Payment($payment) : $payment;
+        }
+        return $this;
+    }
+
+    public function getPayments(): array
+    {
+        return array_map(fn(Payment $payment) => $payment->toArray(), $this->payments);
     }
 }
