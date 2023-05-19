@@ -6,21 +6,17 @@ abstract class BaseClient
 {
     protected array $config;
 
-    /**
-     * @param $config
-     * @return void
-     */
     public function processOptions($config): void
     {
-        if (!isset($config['url'])) {
+        if (! isset($config['url'])) {
             throw new \InvalidArgumentException('Url is required');
         }
 
-        if (!isset($config['token'])) {
+        if (! isset($config['token'])) {
             throw new \InvalidArgumentException('Token is required');
         }
 
-        if (!isset($config['key'])) {
+        if (! isset($config['key'])) {
             throw new \InvalidArgumentException('Key is required');
         }
 

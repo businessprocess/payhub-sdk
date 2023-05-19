@@ -5,16 +5,25 @@ namespace Payhub\Models;
 class OrderClient extends Base
 {
     protected ?string $clientId = null;
+
     protected ?string $clientToId = null;
+
     protected ?string $sponsorId = null;
 
     protected string $firstName;
+
     protected string $secondName;
+
     protected string $email;
+
     protected string $phone;
+
     protected string $country;
+
     protected ?string $city = null;
+
     protected ?string $address = null;
+
     protected ?string $postCode = null;
 
     public function toArray(): array
@@ -133,6 +142,7 @@ class OrderClient extends Base
     public function setClientId(?string $clientId): static
     {
         $this->clientId = $clientId;
+
         return $this;
     }
 
@@ -142,25 +152,21 @@ class OrderClient extends Base
     }
 
     /**
-     * @param string|null $clientToId
      * @return OrderClient
      */
     public function setClientToId(?string $clientToId): static
     {
         $this->clientToId = $clientToId;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getClientToId(): ?string
     {
         return $this->clientToId;
     }
 
     /**
-     * @param string|null $sponsorId
      * @return OrderClient
      */
     public function setSponsorId(?string $sponsorId): static
@@ -170,9 +176,6 @@ class OrderClient extends Base
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSponsorId(): ?string
     {
         return $this->sponsorId;

@@ -7,7 +7,7 @@ abstract class Base
     public function __construct($params = [])
     {
         foreach ($params as $key => $value) {
-            $method = 'set' . str_camel_case($key);
+            $method = 'set'.str_camel_case($key);
             if (method_exists($this, $method)) {
                 $this->{$method}($value);
             }

@@ -28,8 +28,7 @@ class Normalizer
     }
 
     /**
-     * @param Base|OrderClient|OrderDelivery $model
-     * @return void
+     * @param  Base|OrderClient|OrderDelivery  $model
      */
     public function build(Base $model): void
     {
@@ -52,14 +51,15 @@ class Normalizer
             return $id;
         }
 
-        if (!isset($this->searched[$id])) {
+        if (! isset($this->searched[$id])) {
             $result = $this->geoService()->search($id, null, $type);
 
             if ($result->count() !== 1) {
-                throw new \LogicException(ucfirst($type) . ' not found');
+                throw new \LogicException(ucfirst($type).' not found');
             }
             $this->searched[$id] = $result->first()->getId();
         }
+
         return $this->searched[$id];
     }
 }

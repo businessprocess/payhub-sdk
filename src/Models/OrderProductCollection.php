@@ -41,7 +41,7 @@ class OrderProductCollection
     public function toArray(): array
     {
         if ($this->count()) {
-            return $this->map(fn(OrderProduct $product) => $product->toArray())->toArray();
+            return $this->map(fn (OrderProduct $product) => $product->toArray())->toArray();
         }
 
         throw new \LogicException('Order must contain at least one product');

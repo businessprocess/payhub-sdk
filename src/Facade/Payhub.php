@@ -3,9 +3,9 @@
 namespace Payhub\Facade;
 
 use Illuminate\Support\Facades\Facade;
+use Payhub\Models\Order;
 use Payhub\Models\PaymentMethod;
 use Payhub\Responses\OrderCreateResponse;
-use Payhub\Models\Order;
 use Payhub\Service\Webhook;
 
 /**

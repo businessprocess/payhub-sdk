@@ -35,7 +35,7 @@ class Payhub
     {
         $response = $this->client->get('order/{key}');
 
-        return array_map(fn($item) => new Order($item), $response);
+        return array_map(fn ($item) => new Order($item), $response);
     }
 
     public function getById($id): Order
@@ -57,7 +57,7 @@ class Payhub
     {
         $response = $this->client->get('payment-method/list');
 
-        return array_map(fn($item) => new PaymentMethod($item), $response);
+        return array_map(fn ($item) => new PaymentMethod($item), $response);
     }
 
     public function webhook(): Webhook

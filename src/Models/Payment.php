@@ -7,7 +7,9 @@ use http\Exception\InvalidArgumentException;
 class Payment
 {
     public const BALANCE = 'balance';
+
     public const REAL_BALANCE = 'real_balance';
+
     public const CASHBACK = 'cashback';
 
     public const GATEWAYS = [
@@ -39,7 +41,7 @@ class Payment
         if (in_array(static::GATEWAYS, $this->gateway)) {
             return $this->gateway;
         }
-        throw  new InvalidArgumentException("Payment [$this->gateway] not supported");
+        throw new InvalidArgumentException("Payment [$this->gateway] not supported");
     }
 
     public function getAmount(): mixed
@@ -47,18 +49,21 @@ class Payment
         if ($this->amount < 0) {
             throw new InvalidArgumentException('Payment amount must be more than zero');
         }
+
         return $this->amount;
     }
 
     public function setGateway(?string $gateway): Payment
     {
         $this->gateway = $gateway;
+
         return $this;
     }
 
     public function setAmount(mixed $amount): Payment
     {
         $this->amount = $amount;
+
         return $this;
     }
 }

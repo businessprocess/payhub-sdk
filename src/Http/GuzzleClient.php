@@ -2,10 +2,8 @@
 
 namespace Payhub\Http;
 
-use Payhub\Contracts\HttpClient;
 use GuzzleHttp\RequestOptions;
-use Illuminate\Http\Client\Factory;
-use Illuminate\Http\Client\PendingRequest;
+use Payhub\Contracts\HttpClient;
 
 class GuzzleClient extends BaseClient implements HttpClient
 {
@@ -18,7 +16,7 @@ class GuzzleClient extends BaseClient implements HttpClient
         $this->http = new \GuzzleHttp\Client([
             'base_uri' => $this->config['url'],
             RequestOptions::HEADERS => [
-                'Authorization' => 'Bearer ' . $this->config['token'],
+                'Authorization' => 'Bearer '.$this->config['token'],
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
                 RequestOptions::CONNECT_TIMEOUT => $config['connect_timeout'] ?? 80,
@@ -28,9 +26,6 @@ class GuzzleClient extends BaseClient implements HttpClient
         ]);
     }
 
-    /**
-     * @return \GuzzleHttp\Client
-     */
     public function getHttp(): \GuzzleHttp\Client
     {
         return $this->http;

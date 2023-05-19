@@ -5,11 +5,17 @@ namespace Payhub\Models;
 class OrderDelivery extends Base
 {
     protected ?string $type = null;
+
     protected ?string $country = null;
+
     protected ?string $city = null;
+
     protected ?string $address = null;
+
     protected ?string $postCode = null;
+
     protected mixed $price = null;
+
     protected ?int $days = null;
 
     public function toArray(): array
@@ -98,18 +104,15 @@ class OrderDelivery extends Base
     }
 
     /**
-     * @param int $days
      * @return OrderDelivery
      */
     public function setDays(int $days): static
     {
         $this->days = $days;
+
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getDays(): ?int
     {
         return $this->days;

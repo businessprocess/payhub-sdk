@@ -7,26 +7,45 @@ use Payhub\Support\Normalizer;
 class Order extends Base
 {
     protected bool $type = true;
+
     protected array $paymentMethods = [];
+
     protected array $payments = [];
+
     protected mixed $orderId = null;
+
     protected mixed $total;
+
     protected mixed $sale = null;
+
     protected ?string $callbackUrl = null;
+
     protected ?string $redirectSuccess = null;
+
     protected ?string $redirectFail = null;
+
     protected ?string $resource = null;
+
     protected string $language;
+
     protected string $date;
 
+    protected mixed $token = null;
+
     protected mixed $salePercent = null;
+
     protected ?int $showroomId = null;
+
     protected ?string $source = null;
+
     protected ?int $promotionId = null;
 
     protected OrderClient $client;
+
     protected OrderDelivery $delivery;
+
     protected OrderProductCollection $products;
+
     private Normalizer $normalizer;
 
     public function __construct($params = [])
@@ -61,6 +80,7 @@ class Order extends Base
             'redirect_fail' => $this->getRedirectFail(),
             'resource' => $this->getResource(),
 
+            'token' => $this->getToken(),
             'sale_percent' => $this->getSalePercent(),
             'showroom_id' => $this->getShowroomId(),
             'source' => $this->getSource(),
@@ -79,7 +99,7 @@ class Order extends Base
 
     public function isSandbox(): bool
     {
-        return !$this->type;
+        return ! $this->type;
     }
 
     public function sandbox(): static
@@ -127,10 +147,10 @@ class Order extends Base
 
     public function getTotal(): mixed
     {
-        if (!empty($this->payments)) {
+        if (! empty($this->payments)) {
             $total = array_reduce(
                 $this->payments,
-                fn($carry, $payment) => $carry + (float)$payment['amount'],
+                fn ($carry, $payment) => $carry + (float) $payment['amount'],
                 0
             );
 
@@ -140,6 +160,7 @@ class Order extends Base
                 );
             }
         }
+
         return $this->total;
     }
 
@@ -198,9 +219,6 @@ class Order extends Base
         return $this;
     }
 
-    /**
-     * @return OrderClient
-     */
     public function getOrderClient(): OrderClient
     {
         return $this->client;
@@ -213,9 +231,6 @@ class Order extends Base
         return $this;
     }
 
-    /**
-     * @return OrderDelivery
-     */
     public function getOrderDelivery(): OrderDelivery
     {
         return $this->delivery;
@@ -240,9 +255,6 @@ class Order extends Base
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getRedirectSuccess(): ?string
     {
         return $this->redirectSuccess;
@@ -255,9 +267,6 @@ class Order extends Base
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getRedirectFail(): ?string
     {
         return $this->redirectFail;
@@ -270,9 +279,6 @@ class Order extends Base
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getResource(): ?string
     {
         return $this->resource;
@@ -287,15 +293,13 @@ class Order extends Base
 
     private function isUrl($url)
     {
-        if ($url && !filter_var($url, FILTER_VALIDATE_URL)) {
+        if ($url && ! filter_var($url, FILTER_VALIDATE_URL)) {
             throw new \LogicException("Parameter [$url] must be a url");
         }
+
         return $url;
     }
 
-    /**
-     * @return mixed
-     */
     public function getSalePercent(): mixed
     {
         return $this->salePercent;
@@ -308,9 +312,6 @@ class Order extends Base
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getShowroomId(): ?int
     {
         return $this->showroomId;
@@ -323,9 +324,6 @@ class Order extends Base
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSource(): ?string
     {
         return $this->source;
@@ -337,7 +335,6 @@ class Order extends Base
 
         return $this;
     }
-
 
     public function getPromotionId(): ?int
     {
@@ -356,11 +353,24 @@ class Order extends Base
         foreach ($payments as $payment) {
             $this->payments[] = is_array($payment) ? new Payment($payment) : $payment;
         }
+
         return $this;
     }
 
     public function getPayments(): array
     {
-        return array_map(fn(Payment $payment) => $payment->toArray(), $this->payments);
+        return array_map(fn (Payment $payment) => $payment->toArray(), $this->payments);
+    }
+
+    public function setToken(mixed $token): Order
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    public function getToken(): mixed
+    {
+        return $this->token;
     }
 }
