@@ -150,7 +150,7 @@ class Order extends Base
         if (! empty($this->payments)) {
             $total = array_reduce(
                 $this->payments,
-                fn ($carry, $payment) => $carry + (float) $payment['amount'],
+                fn ($carry, $payment) => $carry + (float) $payment->getAmount(),
                 0
             );
 

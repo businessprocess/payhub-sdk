@@ -38,7 +38,7 @@ class Payment
 
     public function getGateway(): ?string
     {
-        if (in_array(static::GATEWAYS, $this->gateway)) {
+        if (in_array($this->gateway, static::GATEWAYS)) {
             return $this->gateway;
         }
         throw new InvalidArgumentException("Payment [$this->gateway] not supported");
