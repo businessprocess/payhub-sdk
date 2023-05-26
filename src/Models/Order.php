@@ -40,6 +40,8 @@ class Order extends Base
 
     protected ?int $promotionId = null;
 
+    protected ?bool $cashbackValidation = null;
+
     protected OrderClient $client;
 
     protected OrderDelivery $delivery;
@@ -85,6 +87,7 @@ class Order extends Base
             'showroom_id' => $this->getShowroomId(),
             'source' => $this->getSource(),
             'promotion_id' => $this->getPromotionId(),
+            'cashback_validation' => $this->getCashbackValidation(),
 
             'client' => $this->normalize($this->getOrderClient())->toArray(),
             'delivery' => $this->normalize($this->getOrderDelivery())->toArray(),
@@ -372,5 +375,24 @@ class Order extends Base
     public function getToken(): mixed
     {
         return $this->token;
+    }
+
+    /**
+     * @param bool|null $cashbackValidation
+     * @return Order
+     */
+    public function setCashbackValidation(bool $cashbackValidation = true): Order
+    {
+        $this->cashbackValidation = $cashbackValidation;
+
+        return $this;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getCashbackValidation(): ?bool
+    {
+        return $this->cashbackValidation;
     }
 }
