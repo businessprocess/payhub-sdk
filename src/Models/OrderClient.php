@@ -108,7 +108,7 @@ class OrderClient extends Base
         return $this->city;
     }
 
-    public function setCity(string $city): static
+    public function setCity(?string $city): static
     {
         $this->city = $city;
 
@@ -120,7 +120,7 @@ class OrderClient extends Base
         return $this->address;
     }
 
-    public function setAddress(string $address): static
+    public function setAddress(?string $address): static
     {
         $this->address = $address;
 
@@ -151,9 +151,6 @@ class OrderClient extends Base
         return $this->clientId;
     }
 
-    /**
-     * @return OrderClient
-     */
     public function setClientToId(?string $clientToId): static
     {
         $this->clientToId = $clientToId;
@@ -166,9 +163,6 @@ class OrderClient extends Base
         return $this->clientToId;
     }
 
-    /**
-     * @return OrderClient
-     */
     public function setSponsorId(?string $sponsorId): static
     {
         $this->sponsorId = $sponsorId;
