@@ -48,7 +48,7 @@ class OrderDelivery extends Base
         return $this->country;
     }
 
-    public function setCountry(string $country): static
+    public function setCountry(?string $country): static
     {
         $this->country = $country;
 
@@ -60,7 +60,7 @@ class OrderDelivery extends Base
         return $this->city;
     }
 
-    public function setCity(string $city): static
+    public function setCity(?string $city): static
     {
         $this->city = $city;
 
@@ -72,7 +72,7 @@ class OrderDelivery extends Base
         return $this->address;
     }
 
-    public function setAddress(string $address): static
+    public function setAddress(?string $address): static
     {
         $this->address = $address;
 
@@ -84,7 +84,7 @@ class OrderDelivery extends Base
         return $this->postCode;
     }
 
-    public function setPostCode(string $postCode): static
+    public function setPostCode(?string $postCode): static
     {
         $this->postCode = $postCode;
 
@@ -103,10 +103,7 @@ class OrderDelivery extends Base
         return $this;
     }
 
-    /**
-     * @return OrderDelivery
-     */
-    public function setDays(int $days): static
+    public function setDays(?int $days): static
     {
         $this->days = $days;
 
