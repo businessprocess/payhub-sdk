@@ -39,27 +39,31 @@ class Normalizer
         }
 
         if (property_exists($model, 'city') && $model?->getCity()) {
-            $model->setCity(
-                $this->getGeoId($model->getCity(), 'city')
-            );
+            try {
+                $city = $this->getGeoId($model->getCity(), 'city');
+            } catch (\LogicException $e) {
+                $city = null;
+            }
+
+            $model->setCity($city);
         }
     }
 
-    private function getGeoId($id, string $type): string
+    private function getGeoId($keyword, string $type): string
     {
-        if ($this->geoService()->isServiceId($id) || strlen($id) === 2) {
-            return $id;
+        if ($this->geoService()->isServiceId($keyword) || strlen($keyword) === 2) {
+            return $keyword;
         }
 
-        if (! isset($this->searched[$id])) {
-            $result = $this->geoService()->search($id, null, $type);
+        if (! isset($this->searched[$keyword])) {
+            $result = $this->geoService()->search($keyword, null, $type);
 
             if ($result->count() !== 1) {
-                throw new \LogicException(ucfirst($type).' not found');
+                throw new \LogicException(sprintf('%s [%s] not found', ucfirst($type), $keyword));
             }
-            $this->searched[$id] = $result->first()->getId();
+            $this->searched[$keyword] = $result->first()->getId();
         }
 
-        return $this->searched[$id];
+        return $this->searched[$keyword];
     }
 }

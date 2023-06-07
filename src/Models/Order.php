@@ -378,8 +378,7 @@ class Order extends Base
     }
 
     /**
-     * @param bool|null $cashbackValidation
-     * @return Order
+     * @param  bool|null  $cashbackValidation
      */
     public function setCashbackValidation(bool $cashbackValidation = true): Order
     {
@@ -388,9 +387,6 @@ class Order extends Base
         return $this;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getCashbackValidation(): ?bool
     {
         return $this->cashbackValidation;
