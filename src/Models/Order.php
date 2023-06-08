@@ -42,6 +42,8 @@ class Order extends Base
 
     protected ?bool $cashbackValidation = null;
 
+    protected mixed $giftCertificateCode = null;
+
     protected OrderClient $client;
 
     protected OrderDelivery $delivery;
@@ -88,6 +90,7 @@ class Order extends Base
             'source' => $this->getSource(),
             'promotion_id' => $this->getPromotionId(),
             'cashback_validation' => $this->getCashbackValidation(),
+            'gift_certificate_code' => $this->getGiftCertificateCode(),
 
             'client' => $this->normalize($this->getOrderClient())->toArray(),
             'delivery' => $this->normalize($this->getOrderDelivery())->toArray(),
@@ -390,5 +393,17 @@ class Order extends Base
     public function getCashbackValidation(): ?bool
     {
         return $this->cashbackValidation;
+    }
+
+    public function setGiftCertificateCode(mixed $giftCertificateCode): Order
+    {
+        $this->giftCertificateCode = $giftCertificateCode;
+
+        return $this;
+    }
+
+    public function getGiftCertificateCode(): mixed
+    {
+        return $this->giftCertificateCode;
     }
 }
