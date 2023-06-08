@@ -139,6 +139,13 @@ class Order extends Base
         return $this;
     }
 
+    public function addPaymentMethod(string $method): static
+    {
+        $this->paymentMethods[] = $method;
+
+        return $this;
+    }
+
     public function getOrderId(): mixed
     {
         return $this->orderId;

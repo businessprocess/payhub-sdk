@@ -2,8 +2,6 @@
 
 namespace Payhub\Models;
 
-use http\Exception\InvalidArgumentException;
-
 class Payment
 {
     public const BALANCE = 'balance';
@@ -41,13 +39,13 @@ class Payment
         if (in_array($this->gateway, static::GATEWAYS)) {
             return $this->gateway;
         }
-        throw new InvalidArgumentException("Payment [$this->gateway] not supported");
+        throw new \InvalidArgumentException("Payment [$this->gateway] not supported");
     }
 
     public function getAmount(): mixed
     {
         if ($this->amount < 0) {
-            throw new InvalidArgumentException('Payment amount must be more than zero');
+            throw new \InvalidArgumentException('Payment amount must be more than zero');
         }
 
         return $this->amount;
