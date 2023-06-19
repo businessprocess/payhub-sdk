@@ -30,6 +30,8 @@ class Order extends Base
 
     protected string $date;
 
+    protected mixed $code = null;
+
     protected mixed $token = null;
 
     protected mixed $salePercent = null;
@@ -83,6 +85,7 @@ class Order extends Base
             'redirect_success' => $this->getRedirectSuccess(),
             'redirect_fail' => $this->getRedirectFail(),
             'resource' => $this->getResource(),
+            'code' => $this->getCode(),
 
             'token' => $this->getToken(),
             'sale_percent' => $this->getSalePercent(),
@@ -412,5 +415,17 @@ class Order extends Base
     public function getGiftCertificateCode(): mixed
     {
         return $this->giftCertificateCode;
+    }
+
+    public function setCode(mixed $code): Order
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    public function getCode(): mixed
+    {
+        return $this->code;
     }
 }
