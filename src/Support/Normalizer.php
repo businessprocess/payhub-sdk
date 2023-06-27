@@ -56,7 +56,11 @@ class Normalizer
         }
 
         if (! isset($this->searched[$keyword])) {
-            $result = $this->geoService()->search($keyword, null, $type);
+            try {
+                $result = $this->geoService()->search($keyword, null, $type);
+            } catch (\Throwable $e) {
+                return $keyword;
+            }
 
             if ($result->count() !== 1) {
                 throw new \LogicException(sprintf('%s [%s] not found', ucfirst($type), $keyword));
