@@ -41,7 +41,7 @@ class Normalizer
         if (property_exists($model, 'city') && $model?->getCity()) {
             try {
                 $city = $this->getGeoId($model->getCity(), 'city');
-            } catch (\LogicException $e) {
+            } catch (\Throwable $e) {
                 $city = null;
             }
 
@@ -56,11 +56,7 @@ class Normalizer
         }
 
         if (! isset($this->searched[$keyword])) {
-            try {
-                $result = $this->geoService()->search($keyword, null, $type);
-            } catch (\Throwable $e) {
-                return $keyword;
-            }
+            $result = $this->geoService()->search($keyword, null, $type);
 
             if ($result->count() !== 1) {
                 throw new \LogicException(sprintf('%s [%s] not found', ucfirst($type), $keyword));
