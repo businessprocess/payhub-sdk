@@ -26,7 +26,7 @@ class Order extends Base
 
     protected ?string $resource = null;
 
-    protected string $language;
+    protected string $language = 'ru';
 
     protected string $date;
 
@@ -81,6 +81,7 @@ class Order extends Base
             'total' => $this->getTotal(),
             'sale' => $this->getSale(),
             'date' => $this->getDate(),
+            'language' => $this->getLanguage(),
             'callback_url' => $this->getCallbackUrl(),
             'redirect_success' => $this->getRedirectSuccess(),
             'redirect_fail' => $this->getRedirectFail(),
