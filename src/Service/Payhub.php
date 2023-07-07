@@ -3,6 +3,7 @@
 namespace Payhub\Service;
 
 use Payhub\Contracts\HttpClient;
+use Payhub\Exceptions\PayhubCreateOrderException;
 use Payhub\Http\GuzzleClient;
 use Payhub\Models\Order;
 use Payhub\Models\PaymentMethod;
@@ -21,9 +22,24 @@ class Payhub
         $this->webhook = new Webhook($this->client);
     }
 
+    /**
+     * @throws PayhubCreateOrderException
+     */
     public function create(Order $order): OrderCreateResponse
     {
-        $response = $this->client->post('order/{key}/create', $order->toArray());
+        try {
+            $response = $this->client->post('order/{key}/create', $order->toArray());
+        } catch (\Illuminate\Http\Client\RequestException $e) {
+            throw new PayhubCreateOrderException(
+                $e->response->json(),
+                $e->response->status()
+            );
+        } catch (\GuzzleHttp\Exception\RequestException $e) {
+            throw new PayhubCreateOrderException(
+                json_decode($e->getResponse()->getBody()->getContents(), true),
+                $e->getResponse()->getStatusCode()
+            );
+        }
 
         return new OrderCreateResponse($response);
     }
