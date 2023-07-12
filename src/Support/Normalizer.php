@@ -2,6 +2,7 @@
 
 namespace Payhub\Support;
 
+use GeoService\Models\Model;
 use GeoService\Service\GeoService;
 use Payhub\Models\Base;
 use Payhub\Models\OrderClient;
@@ -34,7 +35,7 @@ class Normalizer
     {
         if (property_exists($model, 'country') && $model?->getCountry()) {
             $model->setCountry(
-                $this->getGeoId($model->getCountry(), 'country')
+                $this->getGeoId($model->getCountry(), 'country', true)
             );
         }
 
@@ -49,16 +50,20 @@ class Normalizer
         }
     }
 
-    private function getGeoId($keyword, string $type): string
+    private function getGeoId($keyword, string $type, $strict = null): string
     {
         if ($this->geoService()->isServiceId($keyword) || strlen($keyword) === 2) {
             return $keyword;
         }
 
         if (! isset($this->searched[$keyword])) {
-            $result = $this->geoService()->search($keyword, null, $type);
+            $result = $this->geoService()->search($keyword, $strict, $type);
 
-            if ($result->count() !== 1) {
+            $result = $result->filter(function (Model $model) use ($type){
+                return $model->getPlace() === $type;
+            });
+
+            if ($result->count() === 0) {
                 throw new \LogicException(sprintf('%s [%s] not found', ucfirst($type), $keyword));
             }
             $this->searched[$keyword] = $result->first()->getId();
