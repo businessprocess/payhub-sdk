@@ -9,7 +9,7 @@ use Payhub\Responses\OrderCreateResponse;
 use Payhub\Service\Webhook;
 
 /**
- *  * @method static OrderCreateResponse create(Order $order)
+ *  * @method static OrderCreateResponse create(Order $order, bool $fast = false)
  *  * @method static array<Order> getList()
  *  * @method static Order getById(string $id)
  *  * @method static array<PaymentMethod> getPaymentMethods()

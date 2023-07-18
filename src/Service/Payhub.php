@@ -25,10 +25,12 @@ class Payhub
     /**
      * @throws PayhubCreateOrderException
      */
-    public function create(Order $order): OrderCreateResponse
+    public function create(Order $order, bool $fast = false): OrderCreateResponse
     {
         try {
-            $response = $this->client->post('order/{key}/create', $order->toArray());
+            $method = $fast ? 'pay' : 'create';
+
+            $response = $this->client->post("order/{key}/$method", $order->toArray());
         } catch (\Illuminate\Http\Client\RequestException $e) {
             throw new PayhubCreateOrderException(
                 $e->response->json(),
