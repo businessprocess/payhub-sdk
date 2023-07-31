@@ -68,6 +68,11 @@ class Payhub
         return $this->client->get("order/{key}/check/$checkoutId");
     }
 
+    public function link($checkoutId): string
+    {
+        return str_replace('api', $checkoutId, $this->client->config('url'));
+    }
+
     /**
      * @return array<PaymentMethod>
      */

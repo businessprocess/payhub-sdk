@@ -14,6 +14,8 @@ use Payhub\Service\Webhook;
  *  * @method static Order getById(string $id)
  *  * @method static array<PaymentMethod> getPaymentMethods()
  *  * @method static Webhook webhook()
+ *  * @method static array check($checkoutId)
+ *  * @method static string link($checkoutId)
  */
 class Payhub extends Facade
 {

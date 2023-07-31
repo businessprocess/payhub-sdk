@@ -23,6 +23,11 @@ abstract class BaseClient
         $this->config = $config;
     }
 
+    public function config($key)
+    {
+        return $this->config[$key] ?? null;
+    }
+
     public function getUrl($url): string
     {
         return str_replace('{key}', $this->config['key'], $url);
