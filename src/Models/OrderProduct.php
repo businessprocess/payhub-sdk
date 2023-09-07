@@ -62,6 +62,8 @@ class OrderProduct extends Base
 
     protected mixed $codeActivationSoftware = null;
 
+    protected mixed $partnerReward = null;
+
     public function toArray(): array
     {
         return [
@@ -79,6 +81,7 @@ class OrderProduct extends Base
             'bonus_point' => $this->getBonusPoint(),
             'bonus_personal' => $this->getBonusPersonal(),
             'franchise_fee_vipvip' => $this->isFranchiseFeeVipvip(),
+            'partner_reward' => $this->getPartnerReward(),
 
             'singlePurchase' => $this->isSinglePurchase(),
             'universalRefill' => $this->isUniversalRefill(),
@@ -452,5 +455,16 @@ class OrderProduct extends Base
     public function getCodeActivationSoftware(): mixed
     {
         return $this->codeActivationSoftware;
+    }
+
+    public function setPartnerReward(mixed $partnerReward): OrderProduct
+    {
+        $this->partnerReward = $partnerReward;
+        return $this;
+    }
+
+    public function getPartnerReward(): mixed
+    {
+        return $this->partnerReward;
     }
 }
