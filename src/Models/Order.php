@@ -42,6 +42,8 @@ class Order extends Base
 
     protected ?int $promotionId = null;
 
+    protected mixed $presentForSponsor = null;
+
     protected ?bool $cashbackValidation = null;
 
     protected mixed $giftCertificateCode = null;
@@ -95,6 +97,7 @@ class Order extends Base
             'promotion_id' => $this->getPromotionId(),
             'cashback_validation' => $this->getCashbackValidation(),
             'gift_certificate_code' => $this->getGiftCertificateCode(),
+            'present_for_sponsor' => $this->getPresentForSponsor(),
 
             'client' => $this->normalize($this->getOrderClient())->toArray(),
             'delivery' => $this->normalize($this->getOrderDelivery())->toArray(),
@@ -428,5 +431,17 @@ class Order extends Base
     public function getCode(): mixed
     {
         return $this->code;
+    }
+
+    public function setPresentForSponsor(mixed $presentForSponsor): Order
+    {
+        $this->presentForSponsor = $presentForSponsor;
+
+        return $this;
+    }
+
+    public function getPresentForSponsor(): mixed
+    {
+        return $this->presentForSponsor;
     }
 }
