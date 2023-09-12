@@ -62,7 +62,7 @@ class OrderProduct extends Base
 
     protected mixed $codeActivationSoftware = null;
 
-    protected mixed $partnerReward = null;
+    protected ?string $partnerReward = null;
 
     public function toArray(): array
     {
@@ -457,13 +457,13 @@ class OrderProduct extends Base
         return $this->codeActivationSoftware;
     }
 
-    public function setPartnerReward(mixed $partnerReward): OrderProduct
+    public function setPartnerReward(?string $partnerReward): static
     {
         $this->partnerReward = $partnerReward;
         return $this;
     }
 
-    public function getPartnerReward(): mixed
+    public function getPartnerReward(): ?string
     {
         return $this->partnerReward;
     }

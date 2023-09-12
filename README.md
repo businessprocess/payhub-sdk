@@ -1,9 +1,15 @@
 Payhub PHP SDK
 =============================
-
+![PHP 8.x](https://img.shields.io/badge/PHP-%5E8.0-blue)
+[![Laravel 8.x](https://img.shields.io/badge/Laravel-8.x-orange.svg)](http://laravel.com)
+[![Yii 2.x](https://img.shields.io/badge/Yii-2.x-orange)](https://www.yiiframework.com/doc/guide/2.0/ru)
 [![Latest Stable Version](https://poser.pugx.org/businessprocess/payhub-sdk/v/stable)](https://packagist.org/packages/businessprocess/payhub-sdk)
+![Release date](https://img.shields.io/github/release-date/businessprocess/payhub-sdk)
+![Release Version](https://img.shields.io/github/v/release/businessprocess/payhub-sdk)
 ![Total Downloads](https://poser.pugx.org/businessprocess/payhub-sdk/downloads)
+![Pull requests](https://img.shields.io/bitbucket/pr/businessprocess/payhub-sdk)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+![Stars](https://img.shields.io/github/stars/businessprocess/notify-service?style=social)
 
 Payhub SDK is a PSR-compatible PHP package for working with payhub api.
 
