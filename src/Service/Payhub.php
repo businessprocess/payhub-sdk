@@ -33,13 +33,16 @@ class Payhub
             $response = $this->client->post("order/{key}/$method", $order->toArray());
         } catch (\Illuminate\Http\Client\RequestException $e) {
             throw new PayhubCreateOrderException(
-                $e->response->json(),
-                $e->response->status()
+                $e->response->json('message') ?? $e->getMessage(),
+                $e->response->status(),
+                $e->response->json()
             );
         } catch (\GuzzleHttp\Exception\RequestException $e) {
+            $errors = json_decode($e->getResponse()->getBody()->getContents(), true);
             throw new PayhubCreateOrderException(
-                json_decode($e->getResponse()->getBody()->getContents(), true),
-                $e->getResponse()->getStatusCode()
+                $errors['message'] ?? $e->getMessage(),
+                $e->getResponse()->getStatusCode(),
+                $errors
             );
         }
 

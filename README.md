@@ -9,7 +9,7 @@ Payhub PHP SDK
 ![Total Downloads](https://poser.pugx.org/businessprocess/payhub-sdk/downloads)
 ![Pull requests](https://img.shields.io/bitbucket/pr/businessprocess/payhub-sdk)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-![Stars](https://img.shields.io/github/stars/businessprocess/notify-service?style=social)
+![Stars](https://img.shields.io/github/stars/businessprocess/payhub-sdk?style=social)
 
 Payhub SDK is a PSR-compatible PHP package for working with payhub api.
 

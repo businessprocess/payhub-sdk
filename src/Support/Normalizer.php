@@ -59,7 +59,7 @@ class Normalizer
         if (! isset($this->searched[$keyword])) {
             $result = $this->geoService()->search($keyword, $strict, $type);
 
-            $result = $result->filter(function (Model $model) use ($type){
+            $result = $result->filter(function (Model $model) use ($type) {
                 return $model->getPlace() === $type;
             });
 

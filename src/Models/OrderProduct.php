@@ -460,6 +460,7 @@ class OrderProduct extends Base
     public function setPartnerReward(?string $partnerReward): static
     {
         $this->partnerReward = $partnerReward;
+
         return $this;
     }
 

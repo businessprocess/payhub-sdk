@@ -4,13 +4,11 @@ namespace Payhub\Exceptions;
 
 class PayhubCreateOrderException extends \Exception
 {
-    protected array $errors = [];
+    protected ?array $errors = [];
 
-    public function __construct($response, int $code = 0)
+    public function __construct(string $message = 'Server error', int $code = 0, ?array $errors = [])
     {
-        $message = $response['message'] ?? 'Server error';
-
-        $this->errors = $response['errors'] ?? [];
+        $this->errors = $errors ?? [];
 
         parent::__construct($message, $code);
     }
