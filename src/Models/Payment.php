@@ -10,10 +10,13 @@ class Payment
 
     public const CASHBACK = 'cashback';
 
+    public const CASHBACK_STORE = 'cashback_store';
+
     public const GATEWAYS = [
         self::BALANCE,
         self::REAL_BALANCE,
         self::CASHBACK,
+        self::CASHBACK_STORE,
     ];
 
     protected ?string $gateway;
