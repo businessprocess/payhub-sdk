@@ -361,7 +361,7 @@ class Order extends Base
         return $this->promotionId;
     }
 
-    public function setPromotionId(int $promotionId): static
+    public function setPromotionId(?int $promotionId): static
     {
         $this->promotionId = $promotionId;
 

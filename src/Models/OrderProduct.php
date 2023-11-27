@@ -64,6 +64,12 @@ class OrderProduct extends Base
 
     protected ?string $partnerReward = null;
 
+    protected ?array $franchiseFee = null;
+
+    protected ?array $supplements = null;
+
+    protected mixed $vipvipCompanyId = null;
+
     public function toArray(): array
     {
         return [
@@ -81,6 +87,7 @@ class OrderProduct extends Base
             'bonus_point' => $this->getBonusPoint(),
             'bonus_personal' => $this->getBonusPersonal(),
             'franchise_fee_vipvip' => $this->isFranchiseFeeVipvip(),
+            'franchise_fee' => $this->getFranchiseFee(),
             'partner_reward' => $this->getPartnerReward(),
 
             'singlePurchase' => $this->isSinglePurchase(),
@@ -99,6 +106,8 @@ class OrderProduct extends Base
             'paymentsToStock' => $this->getPaymentsToStock(),
             'annualSubscriptionLookMe' => $this->isAnnualSubscriptionLookMe(),
             'code_activation_software' => $this->getCodeActivationSoftware(),
+            'supplements' => $this->getSupplements(),
+            'vipvipCompanyId' => $this->getVipvipCompanyId(),
         ];
     }
 
@@ -467,5 +476,35 @@ class OrderProduct extends Base
     public function getPartnerReward(): ?string
     {
         return $this->partnerReward;
+    }
+
+    public function getFranchiseFee(): ?array
+    {
+        return $this->franchiseFee;
+    }
+
+    public function setFranchiseFee(?array $franchiseFee): void
+    {
+        $this->franchiseFee = $franchiseFee;
+    }
+
+    public function getSupplements(): ?array
+    {
+        return $this->supplements;
+    }
+
+    public function setSupplements(?array $supplements): void
+    {
+        $this->supplements = $supplements;
+    }
+
+    public function getVipvipCompanyId(): mixed
+    {
+        return $this->vipvipCompanyId;
+    }
+
+    public function setVipvipCompanyId(mixed $vipvipCompanyId): void
+    {
+        $this->vipvipCompanyId = $vipvipCompanyId;
     }
 }
