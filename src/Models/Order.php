@@ -337,7 +337,7 @@ class Order extends Base
         return $this->showroomId;
     }
 
-    public function setShowroomId(int $showroomId): static
+    public function setShowroomId(?int $showroomId): static
     {
         $this->showroomId = $showroomId;
 
@@ -349,7 +349,7 @@ class Order extends Base
         return $this->source;
     }
 
-    public function setSource(string $source): static
+    public function setSource(?string $source): static
     {
         $this->source = $source;
 
