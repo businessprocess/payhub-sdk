@@ -70,6 +70,10 @@ class OrderProduct extends Base
 
     protected mixed $vipvipCompanyId = null;
 
+    protected ?array $expirationPeriod = null;
+
+    protected ?bool $autoExtensionBS = null;
+
     public function toArray(): array
     {
         return [
@@ -89,6 +93,9 @@ class OrderProduct extends Base
             'franchise_fee_vipvip' => $this->isFranchiseFeeVipvip(),
             'franchise_fee' => $this->getFranchiseFee(),
             'partner_reward' => $this->getPartnerReward(),
+
+            'expirationPeriod' => $this->getExpirationPeriod(),
+            'autoExtensionBS' => $this->getAutoExtensionBS(),
 
             'singlePurchase' => $this->isSinglePurchase(),
             'universalRefill' => $this->isUniversalRefill(),
@@ -506,5 +513,25 @@ class OrderProduct extends Base
     public function setVipvipCompanyId(mixed $vipvipCompanyId): void
     {
         $this->vipvipCompanyId = $vipvipCompanyId;
+    }
+
+    public function getExpirationPeriod(): ?array
+    {
+        return $this->expirationPeriod;
+    }
+
+    public function setExpirationPeriod(?array $expirationPeriod): void
+    {
+        $this->expirationPeriod = $expirationPeriod;
+    }
+
+    public function getAutoExtensionBS(): ?bool
+    {
+        return $this->autoExtensionBS;
+    }
+
+    public function setAutoExtensionBS(?bool $autoExtensionBS): void
+    {
+        $this->autoExtensionBS = $autoExtensionBS;
     }
 }
