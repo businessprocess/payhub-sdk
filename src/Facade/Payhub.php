@@ -4,6 +4,7 @@ namespace Payhub\Facade;
 
 use Illuminate\Support\Facades\Facade;
 use Payhub\Models\Order;
+use Payhub\Models\PaymentBalance;
 use Payhub\Models\PaymentMethod;
 use Payhub\Responses\OrderCreateResponse;
 use Payhub\Service\Webhook;
@@ -16,6 +17,7 @@ use Payhub\Service\Webhook;
  *  * @method static Webhook webhook()
  *  * @method static array check($checkoutId)
  *  * @method static string link($checkoutId)
+ *  * @method static PaymentBalance getBalance($method = 'stripe')
  */
 class Payhub extends Facade
 {

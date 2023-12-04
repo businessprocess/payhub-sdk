@@ -6,6 +6,7 @@ use Payhub\Contracts\HttpClient;
 use Payhub\Exceptions\PayhubCreateOrderException;
 use Payhub\Http\GuzzleClient;
 use Payhub\Models\Order;
+use Payhub\Models\PaymentBalance;
 use Payhub\Models\PaymentMethod;
 use Payhub\Responses\OrderCreateResponse;
 
@@ -84,6 +85,13 @@ class Payhub
         $response = $this->client->get('payment-method/list');
 
         return array_map(fn ($item) => new PaymentMethod($item), $response);
+    }
+
+    public function getBalance($method = 'stripe'): PaymentBalance
+    {
+        $response = $this->client->get("payment/$method/balance");
+
+        return new PaymentBalance($response);
     }
 
     public function webhook(): Webhook

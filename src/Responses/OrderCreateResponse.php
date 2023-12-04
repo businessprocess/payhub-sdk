@@ -85,7 +85,7 @@ class OrderCreateResponse
 
     public function isPaid(): bool
     {
-        return (int)$this->getStatus() === 1;
+        return (int) $this->getStatus() === 1;
     }
 
     public function getPaymentData(): array
