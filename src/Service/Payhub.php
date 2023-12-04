@@ -87,7 +87,7 @@ class Payhub
         return array_map(fn ($item) => new PaymentMethod($item), $response);
     }
 
-    public function getBalance($method = 'stripe'): PaymentBalance
+    public function getTurnover($method = 'stripe'): PaymentBalance
     {
         $response = $this->client->get("payment/$method/turnover");
 

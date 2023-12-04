@@ -17,7 +17,7 @@ use Payhub\Service\Webhook;
  *  * @method static Webhook webhook()
  *  * @method static array check($checkoutId)
  *  * @method static string link($checkoutId)
- *  * @method static PaymentBalance getBalance($method = 'stripe')
+ *  * @method static PaymentBalance getTurnover($method = 'stripe')
  */
 class Payhub extends Facade
 {
