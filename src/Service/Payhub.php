@@ -89,7 +89,7 @@ class Payhub
 
     public function getBalance($method = 'stripe'): PaymentBalance
     {
-        $response = $this->client->get("payment/$method/balance");
+        $response = $this->client->get("payment/$method/turnover");
 
         return new PaymentBalance($response);
     }
