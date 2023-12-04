@@ -7,39 +7,39 @@ namespace Payhub\Models;
  * @method mixed stripeMoretime()
  * @method mixed stripeMiraverde()
  */
-class PaymentBalance
+class PaymentTurnover
 {
     /**
      * @var array|mixed
      */
-    private mixed $balances;
+    private mixed $turnover;
 
-    public function __construct($balances = [])
+    public function __construct($turnover = [])
     {
-        $this->balances = $balances ?? [];
+        $this->turnover = $turnover ?? [];
     }
 
     public function toArray(): array
     {
-        return $this->balances;
+        return $this->turnover;
     }
 
     public function inPercentToArray(): array
     {
-        $total = array_sum($this->balances);
+        $total = array_sum($this->turnover);
 
         return array_map(function ($balance) use ($total) {
             return $balance / $total * 100;
-        }, $this->balances);
+        }, $this->turnover);
     }
 
-    public function getBalance($key)
+    public function getTurnover($key)
     {
-        return $this->balances[$key] ?? null;
+        return $this->turnover[$key] ?? null;
     }
 
     public function __call($name, $arguments)
     {
-        return $this->getBalance(ltrim(strtolower(preg_replace('/[A-Z]([A-Z](?![a-z]))*/', '_$0', $name)), '_'));
+        return $this->getTurnover(ltrim(strtolower(preg_replace('/[A-Z]([A-Z](?![a-z]))*/', '_$0', $name)), '_'));
     }
 }

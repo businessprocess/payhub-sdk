@@ -4,7 +4,7 @@ namespace Payhub\Facade;
 
 use Illuminate\Support\Facades\Facade;
 use Payhub\Models\Order;
-use Payhub\Models\PaymentBalance;
+use Payhub\Models\PaymentTurnover;
 use Payhub\Models\PaymentMethod;
 use Payhub\Responses\OrderCreateResponse;
 use Payhub\Service\Webhook;
@@ -17,7 +17,7 @@ use Payhub\Service\Webhook;
  *  * @method static Webhook webhook()
  *  * @method static array check($checkoutId)
  *  * @method static string link($checkoutId)
- *  * @method static PaymentBalance getTurnover($method = 'stripe')
+ *  * @method static PaymentTurnover getTurnover($method = 'stripe')
  */
 class Payhub extends Facade
 {
