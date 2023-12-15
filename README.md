@@ -47,9 +47,8 @@ composer update
 
 ```php
 $client = new \Payhub\Service\Payhub([
-    'url' => '', # Project url
-    'key' => '', # Resource key
-    'token' => '', # Api token
+    'url' => '', # Project url  
+    'token' => Oidc::serviceToken(), # Api token
 ]);
 $order = \Payhub\Models\Order::make([
     'type' => 1,
@@ -76,9 +75,11 @@ echo $response->all(); # '[{"link": ...}'
 
 #### Available Methods
 
-| Methods           | Description                   | Return value        | 
-|-------------------|-------------------------------|---------------------|
-| create            | Create order                  | OrderCreateResponse |
-| getList           | Get order list                | array               |
-| getById           | Get order by id               | Order               |
-| getPaymentMethods | Get available payment methods | array               |
+| Methods           | Description                     | Return value        | 
+|-------------------|---------------------------------|---------------------|
+| create            | Create order                    | OrderCreateResponse |
+| getList           | Get order list                  | array               |
+| getById           | Get order by id                 | Order               |
+| getPaymentMethods | Get available payment methods   | array               |
+| getTurnover       | Get turnover by payment methods | PaymentTurnover     |
+| webhook           | Get webhook methods             | Webhook             |

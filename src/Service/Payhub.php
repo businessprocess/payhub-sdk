@@ -6,8 +6,8 @@ use Payhub\Contracts\HttpClient;
 use Payhub\Exceptions\PayhubCreateOrderException;
 use Payhub\Http\GuzzleClient;
 use Payhub\Models\Order;
-use Payhub\Models\PaymentTurnover;
 use Payhub\Models\PaymentMethod;
+use Payhub\Models\PaymentTurnover;
 use Payhub\Responses\OrderCreateResponse;
 
 class Payhub
@@ -31,7 +31,7 @@ class Payhub
         try {
             $method = $fast ? 'pay' : 'create';
 
-            $response = $this->client->post("order/{key}/$method", $order->toArray());
+            $response = $this->client->post("order/$method", $order->toArray());
         } catch (\Illuminate\Http\Client\RequestException $e) {
             throw new PayhubCreateOrderException(
                 $e->response->json('message') ?? $e->getMessage(),
@@ -55,26 +55,26 @@ class Payhub
      */
     public function getList(): array
     {
-        $response = $this->client->get('order/{key}');
+        $response = $this->client->get('order/list');
 
         return array_map(fn ($item) => new Order($item), $response);
     }
 
     public function getById($id): Order
     {
-        $response = $this->client->get("order/{key}/$id");
+        $response = $this->client->get("order/$id");
 
         return new Order($response);
     }
 
     public function check($checkoutId): array
     {
-        return $this->client->get("order/{key}/check/$checkoutId");
+        return $this->client->get("order/check/$checkoutId");
     }
 
     public function link($checkoutId): string
     {
-        return str_replace('api', $checkoutId, $this->client->config('url'));
+        return $this->client->config('url').$checkoutId;
     }
 
     /**

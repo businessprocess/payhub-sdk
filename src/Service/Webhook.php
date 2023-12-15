@@ -15,34 +15,34 @@ class Webhook
      */
     public function all(): array
     {
-        $response = $this->client->get('{key}/webhook');
+        $response = $this->client->get('webhook');
 
         return array_map(fn ($item) => new \Payhub\Models\Webhook($item), $response);
     }
 
     public function get(\Payhub\Models\Webhook $webhook): \Payhub\Models\Webhook
     {
-        $response = $this->client->get('{key}/webhook/'.$webhook->getId());
+        $response = $this->client->get('webhook/'.$webhook->getId());
 
         return new \Payhub\Models\Webhook($response);
     }
 
     public function create(\Payhub\Models\Webhook $webhook): \Payhub\Models\Webhook
     {
-        $response = $this->client->post('{key}/webhook', $webhook->toArray());
+        $response = $this->client->post('webhook', $webhook->toArray());
 
         return new \Payhub\Models\Webhook($response);
     }
 
     public function update(\Payhub\Models\Webhook $webhook): \Payhub\Models\Webhook
     {
-        $response = $this->client->put('{key}/webhook/'.$webhook->getId(), $webhook->toArray());
+        $response = $this->client->put('webhook/'.$webhook->getId(), $webhook->toArray());
 
         return new \Payhub\Models\Webhook($response);
     }
 
     public function delete(\Payhub\Models\Webhook $webhook): void
     {
-        $this->client->delete('{key}/webhook/'.$webhook->getId());
+        $this->client->delete('webhook/'.$webhook->getId());
     }
 }

@@ -4,21 +4,25 @@ namespace Payhub\Http;
 
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\PendingRequest;
+use OidcAuth\Service\OidcService;
 use Payhub\Contracts\HttpClient;
 
 class Client extends BaseClient implements HttpClient
 {
-    protected PendingRequest $http;
+    protected PendingRequest|Factory $http;
 
-    public function __construct(Factory $factory, array $config = [])
+    public function __construct(Factory $factory, OidcService $service, array $config = [])
     {
         $this->processOptions($config);
 
         $this->http = $factory->asJson()
             ->acceptJson()
-            ->baseUrl($this->config['url'])
-            ->withToken($this->config['token'])
-            ->timeout(30);
+            ->baseUrl($this->config('url'))
+            ->timeout($this->config('timeout') ?? 30)
+            ->withHeaders([
+                'authorization' => $this->config('token') ?? $service->serviceToken(),
+            ]);
+
     }
 
     public function getHttp(): Factory|PendingRequest

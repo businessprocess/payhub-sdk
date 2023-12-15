@@ -14,13 +14,13 @@ class GuzzleClient extends BaseClient implements HttpClient
         $this->processOptions($config);
 
         $this->http = new \GuzzleHttp\Client([
-            'base_uri' => $this->config['url'],
+            'base_uri' => $this->config('url'),
             RequestOptions::HEADERS => [
-                'Authorization' => 'Bearer '.$this->config['token'],
+                'Authorization' => $this->config('token'),
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
-                RequestOptions::CONNECT_TIMEOUT => $config['connect_timeout'] ?? 80,
-                RequestOptions::TIMEOUT => $config['timeout'] ?? 30,
+                RequestOptions::CONNECT_TIMEOUT => $this->config('connect_timeout') ?? 80,
+                RequestOptions::TIMEOUT => $this->config('timeout') ?? 30,
                 'http_errors' => true,
             ],
         ]);

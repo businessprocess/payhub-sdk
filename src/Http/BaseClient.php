@@ -12,13 +12,9 @@ abstract class BaseClient
             throw new \InvalidArgumentException('Url is required');
         }
 
-        if (! isset($config['token'])) {
-            throw new \InvalidArgumentException('Token is required');
-        }
+        $url = parse_url($config['url']);
 
-        if (! isset($config['key'])) {
-            throw new \InvalidArgumentException('Key is required');
-        }
+        $config['url'] = sprintf('%s://%s/', $url['scheme'], $url['host']);
 
         $this->config = $config;
     }
@@ -30,6 +26,6 @@ abstract class BaseClient
 
     public function getUrl($url): string
     {
-        return str_replace('{key}', $this->config['key'], $url);
+        return "api/v1/$url";
     }
 }
