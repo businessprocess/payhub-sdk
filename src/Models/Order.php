@@ -48,6 +48,8 @@ class Order extends Base
 
     protected mixed $giftCertificateCode = null;
 
+    protected int $orderType = 0;
+
     protected OrderClient $client;
 
     protected OrderDelivery $delivery;
@@ -98,6 +100,7 @@ class Order extends Base
             'cashback_validation' => $this->getCashbackValidation(),
             'gift_certificate_code' => $this->getGiftCertificateCode(),
             'present_for_sponsor' => $this->getPresentForSponsor(),
+            'order_type' => $this->getOrderType(),
 
             'client' => $this->normalize($this->getOrderClient())->toArray(),
             'delivery' => $this->normalize($this->getOrderDelivery())->toArray(),
@@ -443,5 +446,15 @@ class Order extends Base
     public function getPresentForSponsor(): mixed
     {
         return $this->presentForSponsor;
+    }
+
+    public function getOrderType(): int
+    {
+        return $this->orderType;
+    }
+
+    public function setOrderType(int $orderType): void
+    {
+        $this->orderType = $orderType;
     }
 }
