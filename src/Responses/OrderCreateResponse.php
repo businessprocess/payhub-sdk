@@ -6,6 +6,8 @@ use DateTime;
 
 class OrderCreateResponse
 {
+    public const STATUS_PAID = 1;
+
     protected string $link;
 
     protected string $checkoutId;
@@ -22,6 +24,8 @@ class OrderCreateResponse
 
     protected ?string $message;
 
+    protected array $payment = [];
+
     public function __construct($params)
     {
         $this->checkoutId = $params['checkout_id'];
@@ -32,6 +36,7 @@ class OrderCreateResponse
         $this->checkoutData = $params['checkout_data'] ?? [];
         $this->paymentData = $params['payment_data'] ?? [];
         $this->status = $params['status'] ?? 0;
+        $this->payment = $params['payment'] ?? [];
     }
 
     public function toArray(): array
@@ -45,6 +50,7 @@ class OrderCreateResponse
             'link' => $this->getLink(),
             'dateExpired' => $this->getDateExpired(),
             'message' => $this->getMessage(),
+            'payment' => $this->getPayment(),
         ];
     }
 
@@ -85,11 +91,31 @@ class OrderCreateResponse
 
     public function isPaid(): bool
     {
-        return (int) $this->getStatus() === 1;
+        return (int) $this->getStatus() === static::STATUS_PAID;
     }
 
     public function getPaymentData(): array
     {
         return $this->paymentData;
+    }
+
+    public function getPayment(): array
+    {
+        return $this->payment;
+    }
+
+    public function getPaymentAmount()
+    {
+        return $this->payment['amount'] ?? null;
+    }
+
+    public function getPaymentRate()
+    {
+        return $this->payment['rate'] ?? null;
+    }
+
+    public function getPaymentCurrencyCode()
+    {
+        return $this->payment['currency_code'] ?? null;
     }
 }
