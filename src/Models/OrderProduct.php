@@ -22,6 +22,8 @@ class OrderProduct extends Base
 
     protected bool $isVirtual = false;
 
+    protected bool $preorder = false;
+
     protected mixed $salePercent = null;
 
     protected mixed $bonusPoint = null;
@@ -86,6 +88,7 @@ class OrderProduct extends Base
             'count' => $this->getCount(),
             'sale' => $this->getSale(),
             'is_virtual' => $this->isVirtual(),
+            'preorder' => $this->isPreorder(),
 
             'sale_percent' => $this->getSalePercent(),
             'bonus_point' => $this->getBonusPoint(),
@@ -533,5 +536,15 @@ class OrderProduct extends Base
     public function setAutoExtensionBS(?bool $autoExtensionBS): void
     {
         $this->autoExtensionBS = $autoExtensionBS;
+    }
+
+    public function isPreorder(): bool
+    {
+        return $this->preorder;
+    }
+
+    public function setPreorder(bool $preorder): void
+    {
+        $this->preorder = $preorder;
     }
 }
