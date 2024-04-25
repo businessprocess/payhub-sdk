@@ -50,6 +50,8 @@ class Order extends Base
 
     protected int $orderType = 0;
 
+    protected array $meta = [];
+
     protected OrderClient $client;
 
     protected OrderDelivery $delivery;
@@ -456,5 +458,15 @@ class Order extends Base
     public function setOrderType(int $orderType): void
     {
         $this->orderType = $orderType;
+    }
+
+    public function getMeta(): array
+    {
+        return $this->meta;
+    }
+
+    public function setMeta(array $meta): void
+    {
+        $this->meta = $meta;
     }
 }
