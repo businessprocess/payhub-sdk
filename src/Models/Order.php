@@ -93,6 +93,7 @@ class Order extends Base
             'redirect_fail' => $this->getRedirectFail(),
             'resource' => $this->getResource(),
             'code' => $this->getCode(),
+            'meta' => $this->getMeta(),
 
             'token' => $this->getToken(),
             'sale_percent' => $this->getSalePercent(),
