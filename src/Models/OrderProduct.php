@@ -76,6 +76,8 @@ class OrderProduct extends Base
 
     protected ?bool $autoExtensionBS = null;
 
+    protected mixed $annualSubscriptionWS = null;
+
     public function toArray(): array
     {
         return [
@@ -101,6 +103,7 @@ class OrderProduct extends Base
             'autoExtensionBS' => $this->getAutoExtensionBS(),
 
             'singlePurchase' => $this->isSinglePurchase(),
+            'annualSubscriptionWS' => $this->getAnnualSubscriptionWS(),
             'universalRefill' => $this->isUniversalRefill(),
             'universalRefillValue' => $this->getUniversalRefillValue(),
             'productBalanceTopUp' => $this->isProductBalanceTopUp(),
@@ -546,5 +549,15 @@ class OrderProduct extends Base
     public function setPreorder(bool $preorder): void
     {
         $this->preorder = $preorder;
+    }
+
+    public function getAnnualSubscriptionWS(): mixed
+    {
+        return $this->annualSubscriptionWS;
+    }
+
+    public function setAnnualSubscriptionWS(mixed $annualSubscriptionWS): void
+    {
+        $this->annualSubscriptionWS = $annualSubscriptionWS;
     }
 }
