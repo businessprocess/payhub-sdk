@@ -78,6 +78,8 @@ class OrderProduct extends Base
 
     protected mixed $annualSubscriptionWS = null;
 
+    protected ?int $markup = 0;
+
     public function toArray(): array
     {
         return [
@@ -91,6 +93,7 @@ class OrderProduct extends Base
             'sale' => $this->getSale(),
             'is_virtual' => $this->isVirtual(),
             'preorder' => $this->isPreorder(),
+            'markup' => $this->getMarkup(),
 
             'sale_percent' => $this->getSalePercent(),
             'bonus_point' => $this->getBonusPoint(),
@@ -559,5 +562,15 @@ class OrderProduct extends Base
     public function setAnnualSubscriptionWS(mixed $annualSubscriptionWS): void
     {
         $this->annualSubscriptionWS = $annualSubscriptionWS;
+    }
+
+    public function getMarkup(): ?int
+    {
+        return $this->markup;
+    }
+
+    public function setMarkup(?int $markup): void
+    {
+        $this->markup = $markup;
     }
 }
