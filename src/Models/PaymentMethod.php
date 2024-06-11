@@ -20,6 +20,14 @@ class PaymentMethod extends Base
 
     protected bool $credit;
 
+    protected bool $acquiring;
+
+    protected bool $cashless;
+
+    protected bool $voucher;
+
+    protected bool $cryptocurrency;
+
     protected string $category;
 
     public function getId(): mixed
@@ -100,5 +108,45 @@ class PaymentMethod extends Base
     public function setCategory(string $category): void
     {
         $this->category = $category;
+    }
+
+    public function isAcquiring(): bool
+    {
+        return $this->acquiring;
+    }
+
+    public function setAcquiring(bool $acquiring): void
+    {
+        $this->acquiring = $acquiring;
+    }
+
+    public function isCashless(): bool
+    {
+        return $this->cashless;
+    }
+
+    public function setCashless(bool $cashless): void
+    {
+        $this->cashless = $cashless;
+    }
+
+    public function isVoucher(): bool
+    {
+        return $this->voucher;
+    }
+
+    public function setVoucher(bool $voucher): void
+    {
+        $this->voucher = $voucher;
+    }
+
+    public function isCryptocurrency(): bool
+    {
+        return $this->cryptocurrency;
+    }
+
+    public function setCryptocurrency(bool $cryptocurrency): void
+    {
+        $this->cryptocurrency = $cryptocurrency;
     }
 }
