@@ -30,6 +30,24 @@ class PaymentMethod extends Base
 
     protected string $category;
 
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'key' => $this->getKey(),
+            'active' => $this->isActive(),
+            'countries' => $this->getCountries(),
+            'confirmation' => $this->isConfirmation(),
+            'real_money' => $this->isRealMoney(),
+            'credit' => $this->isCredit(),
+            'acquiring' => $this->isAcquiring(),
+            'cashless' => $this->isCashless(),
+            'voucher' => $this->isVoucher(),
+            'cryptocurrency' => $this->isCryptocurrency(),
+            'category' => $this->getCategory(),
+        ];
+    }
+
     public function getId(): mixed
     {
         return $this->id;
@@ -148,5 +166,15 @@ class PaymentMethod extends Base
     public function setCryptocurrency(bool $cryptocurrency): void
     {
         $this->cryptocurrency = $cryptocurrency;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): void
+    {
+        $this->active = $active;
     }
 }
