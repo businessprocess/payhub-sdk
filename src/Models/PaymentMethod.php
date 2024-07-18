@@ -2,13 +2,15 @@
 
 namespace Payhub\Models;
 
-class PaymentMethod extends Base
+class PaymentMethod extends Base implements \ArrayAccess, \JsonSerializable
 {
     protected mixed $id;
 
     protected string $title;
 
     protected string $key;
+
+    protected ?string $icon;
 
     protected bool $active;
 
@@ -30,12 +32,16 @@ class PaymentMethod extends Base
 
     protected string $category;
 
+    protected array $config = [];
+
     public function toArray(): array
     {
         return [
             'id' => $this->getId(),
+            'title' => $this->getTitle(),
             'key' => $this->getKey(),
             'active' => $this->isActive(),
+            'icon' => $this->getIcon(),
             'countries' => $this->getCountries(),
             'confirmation' => $this->isConfirmation(),
             'real_money' => $this->isRealMoney(),
@@ -45,6 +51,7 @@ class PaymentMethod extends Base
             'voucher' => $this->isVoucher(),
             'cryptocurrency' => $this->isCryptocurrency(),
             'category' => $this->getCategory(),
+            'config' => $this->getConfig(),
         ];
     }
 
@@ -176,5 +183,78 @@ class PaymentMethod extends Base
     public function setActive(bool $active): void
     {
         $this->active = $active;
+    }
+
+    public function getIcon(): ?string
+    {
+        return $this->icon;
+    }
+
+    public function setIcon(?string $icon): void
+    {
+        $this->icon = $icon;
+    }
+
+    public function getConfig($key = null): mixed
+    {
+        if ($key) {
+            return $this->config[$key] ?? null;
+        }
+        return $this->config;
+    }
+
+    public function setConfig(array $config): void
+    {
+        $this->config = $config;
+    }
+
+    public function getBankAccount(): ?array
+    {
+        return $this->getConfig('bank_account');
+    }
+
+    public function __toArray(): array
+    {
+        return $this->toArray();
+    }
+
+    public function toString(): string
+    {
+        return $this->getTitle();
+    }
+
+    public function __toString(): string
+    {
+        return $this->toString();
+    }
+
+    public function __isset(string $name): bool
+    {
+        return $this->$name !== null;
+    }
+
+    public function offsetExists(mixed $offset): bool
+    {
+        return $this->__isset($offset);
+    }
+
+    public function offsetGet(mixed $offset)
+    {
+        return $this->$offset;
+    }
+
+    public function offsetSet(mixed $offset, mixed $value): void
+    {
+        $this->$offset = $value;
+    }
+
+    public function offsetUnset(mixed $offset): void
+    {
+        $this->$offset = null;
+    }
+
+    public function jsonSerialize()
+    {
+        return $this->toArray();
     }
 }
