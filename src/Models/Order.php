@@ -10,6 +10,8 @@ class Order extends Base
 
     protected array $paymentMethods = [];
 
+    protected ?string $paymentCountry = null;
+
     protected array $payments = [];
 
     protected mixed $orderId = null;
@@ -82,6 +84,7 @@ class Order extends Base
         return [
             'type' => $this->getType(),
             'payment_methods' => $this->getPaymentMethods(),
+            'payment_country' => $this->getPaymentCountry(),
             'payments' => $this->getPayments(),
             'order_id' => $this->getOrderId(),
             'total' => $this->getTotal(),
@@ -469,5 +472,15 @@ class Order extends Base
     public function setMeta(array $meta): void
     {
         $this->meta = $meta;
+    }
+
+    public function getPaymentCountry(): ?string
+    {
+        return $this->paymentCountry;
+    }
+
+    public function setPaymentCountry(?string $paymentCountry): void
+    {
+        $this->paymentCountry = $paymentCountry;
     }
 }
