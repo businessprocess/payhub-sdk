@@ -8,6 +8,14 @@ abstract class BaseClient
 
     public function processOptions($config): void
     {
+        $host = request()->getSchemeAndHttpHost();
+
+        if (isset($config['app_eu_url']) && isset($config['eu_url']) && $host === $config['app_eu_url']) {
+            $config['url'] = $config['eu_url'];
+        } elseif (isset($config['app_ru_url']) && isset($config['ru_url']) && $host === $config['app_ru_url']) {
+            $config['url'] = $config['ru_url'];
+        }
+
         if (! isset($config['url'])) {
             throw new \InvalidArgumentException('Url is required');
         }
