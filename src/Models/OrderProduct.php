@@ -80,6 +80,8 @@ class OrderProduct extends Base
 
     protected ?int $markup = 0;
 
+    protected ?array $repairData = null;
+
     public function toArray(): array
     {
         return [
@@ -124,6 +126,7 @@ class OrderProduct extends Base
             'code_activation_software' => $this->getCodeActivationSoftware(),
             'supplements' => $this->getSupplements(),
             'vipvipCompanyId' => $this->getVipvipCompanyId(),
+            'repairData' => $this->getRepairData(),
         ];
     }
 
@@ -572,5 +575,15 @@ class OrderProduct extends Base
     public function setMarkup(?int $markup): void
     {
         $this->markup = $markup;
+    }
+
+    public function setRepairData(?array $repairData): void
+    {
+        $this->repairData = $repairData;
+    }
+
+    public function getRepairData(): ?array
+    {
+        return $this->repairData;
     }
 }
