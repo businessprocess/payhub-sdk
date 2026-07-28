@@ -8,6 +8,8 @@ class OrderClient extends Base
 
     protected ?string $clientToId = null;
 
+    protected ?bool $isDropshipper = null;
+
     protected ?string $sponsorId = null;
 
     protected string $firstName;
@@ -40,7 +42,20 @@ class OrderClient extends Base
             'city' => $this->getCity(),
             'address' => $this->getAddress(),
             'postcode' => $this->getPostCode(),
+            'is_dropshipper' => $this->getIsDropshipper(),
         ];
+    }
+
+    public function getIsDropshipper(): ?bool
+    {
+        return $this->isDropshipper ?? null;
+    }
+
+    public function setIsDropshipper(?bool $isDropshipper): static
+    {
+        $this->isDropshipper = $isDropshipper;
+
+        return $this;
     }
 
     public function getFirstName(): string
