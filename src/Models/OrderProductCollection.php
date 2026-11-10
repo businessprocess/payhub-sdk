@@ -3,6 +3,7 @@
 namespace Payhub\Models;
 
 use ArgumentCountError;
+use GeoService\Support\Collection;
 
 class OrderProductCollection
 {
@@ -35,7 +36,9 @@ class OrderProductCollection
             $items = array_map($callback, $this->items);
         }
 
-        return collect(array_combine($keys, $items));
+        $items = array_combine($keys, $items);
+
+        return function_exists('collect') ? collect($items) : new Collection($items);
     }
 
     public function toArray(): array
